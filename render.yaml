@@ -1,10 +1,9 @@
 services:
   - type: web
-    name: UploadIt
+    name: UplaodIt
     env: node
     buildCommand: npm install
     startCommand: npm start
-    staticPublishPath: /dist
     plan: free
-    regions:
-      - oregon
+    autoDeploy: true
+    healthCheckPath: /health
