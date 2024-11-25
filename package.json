@@ -20,7 +20,7 @@
     "dotenv": "^16.4.5",
     "ejs": "^3.1.10",
     "express": "^4.21.1",
-    "express-sessions": "^1.0.6",
+    "express-sessions": "^1.0.1",
     "express-validator": "^7.2.0",
     "file-icons-js": "github:websemantics/file-icons-js",
     "font-awesome": "^4.7.0",
