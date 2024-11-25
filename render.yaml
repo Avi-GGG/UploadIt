@@ -1,0 +1,10 @@
+services:
+  - type: web
+    name: UploadIt
+    env: node
+    buildCommand: npm install
+    startCommand: npm start
+    staticPublishPath: /dist
+    plan: free
+    regions:
+      - oregon
