@@ -4,7 +4,7 @@
   "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "npx nodemon app.js",
+    "start": "node app.js",
     "build:css": "postcss public/stylesheets/styles.css -o public/stylesheets/index.css",
     "dev:css": "postcss src/styles.css -o public/css/styles.css --watch"
   },
