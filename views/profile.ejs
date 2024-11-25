@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/flowbite@2.5.2/dist/flowbite.min.css" rel="stylesheet" />
+    <link
+    href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css"
+    rel="stylesheet"
+    />
+    <link href="/stylesheets/styles.css" rel="stylesheet">
+</head>
+<body >
+    <div id="profileModal" class=" fixed inset-0 flex items-center justify-center ">
+      <video autoplay muted loop class="absolute top-0 left-0 w-full h-full object-cover">
+        <source src="https://videos.pexels.com/video-files/4153409/4153409-sd_640_360_25fps.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+      </video>
+      <span onclick="window.location.href='/home'" class="absolute text-shadow-md cursor-pointer top-0 text-md left-3 mt-4 font-bold text-blue-700 hover:text-red-700">< Go Home</i></span>
+
+      <button id="editProfileBtn" onclick="enableEditing()" class="absolute cursor-pointer top-4 right-4 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+        Edit Profile
+    </button>
+
+        <div class="flex bg-white  rounded-lg shadow-lg  relative h-96 w-[50rem] ">
+          
+          <form action="/update-profile" class="flex relative w-full h-full" method="POST" enctype="multipart/form-data">
+            <button type="button" onclick="triggerFileInput()" id="pfp" class="  -top-20 left-64  w-1/2 h-full transition-transform duration-300 ease-in-out transform hover:scale-110 hover:-rotate-6 rounded-xl"><img id="pfp-preview" class="w-full h-full object-cover rounded-xl" src="/images/uploads/<%= user.profilepic %>" alt=""></button>    
+    
+            <div class="mb-4 hidden">
+                <label for="profilepic" class="block"></label>
+                <input disabled onchange="previewProfilePic(event)" type="file" id="profilepic" name="profilepic" class="input w-full p-2 mt-1 border border-gray-300 rounded-md">
+            </div>
+            <div class="w-1/2 h-full flex flex-col items-center justify-center">
+              <span class="absolute border-none -top-3 -left-3 rounded-[6.25rem] overflow-hidden bg-emerald-600">
+                <label for="username" class="block text-sm"></label>
+                <input disabled type="text" id="username" name="username" value="@<%= user.username %>" class="text-white font-semibold bg-[#1c1c1c] border-none">
+              </span>
+              <div class="mb-4 mx-auto w-8/12">
+                <label for="realname" class="block text-sm"></label>
+                <input disabled type="text" id="realname" name="realname" value="<%= user.realname %>" placeholder="Enter your name" class="input w-full p-2 mt-1 border-0 border-b-2 rounded border-gray-300 focus:border-emerald-500  focus:ring-0 text-sm font-semibold">
+              </div>
+              <div class="mb-4 mx-auto w-8/12">
+                <label for="email" class="block text-sm"></label>
+                <input disabled type="email" id="email" name="email" placeholder="Enter the email" value="<%= user.email %>" class="input w-full p-2 mt-1 border-0 border-b-2 rounded border-gray-300 focus:border-emerald-500  focus:ring-0 text-sm font-semibold">
+              </div>
+              
+              <button id="updateProfileBtn"  type="submit" class="input hidden bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded w-8/12 mt-2">Update Profile</button>
+            </div>
+            
+          </form>
+        </div>
+    </div>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/flowbite@2.5.2/dist/flowbite.min.js"></script>
+    <script>
+         function triggerFileInput(){
+            
+            document.querySelector('#profilepic').click();
+        }
+
+        function previewProfilePic(event) {
+            const file = event.target.files[0];
+            const preview = document.getElementById('pfp-preview');
+
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function (e) {
+                    preview.src = e.target.result; // Set the preview to the selected image
+                };
+                reader.readAsDataURL(file); // Read the file as a Data URL
+            }
+        }
+
+        function enableEditing() {
+            const inputs = document.querySelectorAll('.input');
+            inputs.forEach(input => {
+                input.disabled = false; // Enable all inputs
+            });
+
+            document.getElementById('updateProfileBtn').classList.remove('hidden'); // Show the "Update Profile" button
+            document.getElementById('editProfileBtn').classList.add('hidden'); // Show the "Update Profile" button
+        }
+        
+    </script>
+</body>
+</html>
